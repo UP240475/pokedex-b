@@ -1,8 +1,9 @@
+import PokemonCard from "@/components/PokemonCard";
+import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Button, ScrollView } from "react-native";
 
 export default function Index() {
-
   const [results, setResults] = useState<any[]>([]);
 
   useEffect(() => {
@@ -21,11 +22,16 @@ export default function Index() {
     console.log(data);
   };
   return (
-    <View>
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+    <ScrollView>
+      <Button title="pokemon" onPress={() => router.push("/pokemon")} /> 
+
+      <Button title="new-screen" onPress={() => router.push("/new-screen")} />
+
+      <Button title="dynamic Route" onPress={() => router.push("/pokemon/[name]")}/>
+
       {results.map((pokemon) => (
-        <Text key={pokemon.name}>{pokemon.name} </Text>
+        <PokemonCard key={pokemon.name} name={pokemon.name} url={pokemon.url} />
       ))}
-    </View>
+    </ScrollView>
   );
 }
